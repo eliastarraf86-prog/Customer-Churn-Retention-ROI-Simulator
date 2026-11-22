@@ -1,0 +1,17 @@
+{
+  "selected_model": "logistic_regression",
+  "metrics": {
+    "logistic_regression": {
+      "cv_roc_auc": 0.8477,
+      "cv_pr_auc": 0.6619,
+      "test_roc_auc": 0.8457,
+      "test_pr_auc": 0.6524
+    },
+    "hist_gradient_boosting": {
+      "cv_roc_auc": 0.8452,
+      "cv_pr_auc": 0.6589,
+      "test_roc_auc": 0.8407,
+      "test_pr_auc": 0.6517
+    }
+  }
+}

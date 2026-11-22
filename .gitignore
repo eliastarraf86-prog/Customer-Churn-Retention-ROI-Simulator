@@ -1,0 +1,25 @@
+﻿# Virtual environment & Python cache
+venv/
+__pycache__/
+*.py[cod]
+*.class
+
+# Private data, databases & local artifacts
+data/*
+!data/.gitkeep
+*.db
+*.sqlite
+*.sqlite3
+*.csv
+
+# Environment variables & secrets
+.env
+.env.*
+*.pem
+*.key
+secrets.toml
+
+# OS & editor files
+.DS_Store
+Thumbs.db
+.vscode/

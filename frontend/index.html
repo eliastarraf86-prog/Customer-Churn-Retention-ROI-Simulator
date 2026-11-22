@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Churn &amp; Retention ROI Simulator</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="badge">ML + FASTAPI</span>
+        <h1>Retention ROI</h1>
+        <p>Cost-sensitive threshold optimizer on 1,409 test accounts.</p>
+      </div>
+
+      <div class="control-group">
+        <label for="threshold">Alert Threshold: <strong id="thresholdVal">0.35</strong></label>
+        <input id="threshold" type="range" min="0.05" max="0.90" step="0.01" value="0.35" />
+      </div>
+
+      <div class="control-group">
+        <label for="offerCost">Retention Offer Cost ($)</label>
+        <input id="offerCost" type="number" min="5" max="500" step="5" value="30" />
+      </div>
+
+      <div class="control-group">
+        <label for="saveRate">Offer Save Rate (%): <strong id="saveRateVal">35%</strong></label>
+        <input id="saveRate" type="range" min="5" max="90" step="5" value="35" />
+      </div>
+
+      <div class="control-group">
+        <label for="ltvValue">Retained Customer LTV ($)</label>
+        <input id="ltvValue" type="number" min="100" max="5000" step="50" value="600" />
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="top-bar">
+        <div>
+          <h2>Customer Churn &amp; Retention ROI Simulator</h2>
+          <p class="subtitle">Logistic Regression pipeline (0.8457 Test ROC-AUC | 0.6524 Test PR-AUC)</p>
+        </div>
+        <div id="optimalPill" class="optimal-pill">Optimal: $0 @ 0.00</div>
+      </header>
+
+      <section class="kpi-grid">
+        <article class="kpi-card">
+          <span class="kpi-label">Net Financial Impact</span>
+          <strong id="netSavings" class="kpi-value">$0</strong>
+          <span id="netSub" class="kpi-sub">vs. baseline</span>
+        </article>
+        <article class="kpi-card">
+          <span class="kpi-label">Customers Targeted</span>
+          <strong id="targetedCount" class="kpi-value">0</strong>
+          <span id="precisionSub" class="kpi-sub">Precision: 0%</span>
+        </article>
+        <article class="kpi-card">
+          <span class="kpi-label">Churners Caught</span>
+          <strong id="caughtCount" class="kpi-value">0 / 0</strong>
+          <span id="recallSub" class="kpi-sub">Recall: 0%</span>
+        </article>
+        <article class="kpi-card">
+          <span class="kpi-label">Campaign Spend</span>
+          <strong id="campaignSpend" class="kpi-value">$0</strong>
+          <span id="savedUsersSub" class="kpi-sub">Est. Saved: 0 users</span>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h3>Net Retention Profit Across Thresholds</h3>
+          <span class="legend-note">Green line = Optimal threshold | White line = Selected threshold</span>
+        </div>
+        <canvas id="roiChart" width="960" height="320"></canvas>
+      </section>
+
+      <section class="panel">
+        <h3>Single-Customer Risk &amp; Action Simulator</h3>
+        <div class="form-grid">
+          <div class="control-group">
+            <label for="custTenure">Tenure (Months): <strong id="custTenureVal">4</strong></label>
+            <input id="custTenure" type="range" min="0" max="72" step="1" value="4" />
+          </div>
+          <div class="control-group">
+            <label for="custCharges">Monthly Charges ($)</label>
+            <input id="custCharges" type="number" min="18" max="120" step="1" value="85" />
+          </div>
+          <div class="control-group">
+            <label for="custContract">Contract Type</label>
+            <select id="custContract">
+              <option value="Month-to-month">Month-to-month</option>
+              <option value="One year">One year</option>
+              <option value="Two year">Two year</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="custInternet">Internet Service</label>
+            <select id="custInternet">
+              <option value="Fiber optic">Fiber optic</option>
+              <option value="DSL">DSL</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="custSupport">Tech Support</label>
+            <select id="custSupport">
+              <option value="No">No</option>
+              <option value="Yes">Yes</option>
+              <option value="No internet service">No internet service</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="custPayment">Payment Method</label>
+            <select id="custPayment">
+              <option value="Electronic check">Electronic check</option>
+              <option value="Mailed check">Mailed check</option>
+              <option value="Bank transfer (automatic)">Bank transfer (automatic)</option>
+              <option value="Credit card (automatic)">Credit card (automatic)</option>
+            </select>
+          </div>
+        </div>
+        <div id="customerResult" class="decision-banner">Calculating customer risk...</div>
+      </section>
+    </main>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
